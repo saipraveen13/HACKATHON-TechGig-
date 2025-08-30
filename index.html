@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>OrientAware — Mobile Orientation App</title>
+  <meta name="theme-color" content="#0f172a" />
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <header>
+      <div class="title">
+        <span class="badge">AI-first</span> OrientAware
+      </div>
+      <div class="mode" id="mode">Detecting…</div>
+    </header>
+
+    <section class="card">
+      <div class="perm" id="motion-perm" style="display:none;">
+        <div>
+          <div style="font-weight:700;">Enable Motion Access</div>
+          <div class="hint">iOS may require permission for motion/orientation. Tap to grant so we can detect upside-down orientation correctly.</div>
+        </div>
+        <button id="grantMotion" class="primary">Enable</button>
+      </div>
+
+      <div class="toggleBar">
+        <button class="ghost" id="simulatePortraitPrimary">Sim Portrait ↑</button>
+        <button class="ghost" id="simulatePortraitSecondary">Sim Portrait ↓</button>
+        <button class="ghost" id="simulateLandscapePrimary">Sim Land ⟲</button>
+        <button class="ghost" id="simulateLandscapeSecondary">Sim Land ⟳</button>
+      </div>
+      <div class="hint">Rotate your phone to switch features: Portrait ↑ Alarm • Portrait ↓ Timer • Landscape ⟲ Stopwatch • Landscape ⟳ Weather.</div>
+    </section>
+
+    <!-- Alarm (Portrait Primary) -->
+    <section class="card stack feature" id="alarmCard">
+      <div class="row" style="justify-content:space-between">
+        <div style="font-weight:800; font-size:18px;">⏰ Alarm Clock</div>
+        <div class="hint" id="alarmStatus">No alarm set</div>
+      </div>
+      <div class="grid">
+        <label class="stack">
+          <span class="hint">Alarm time</span>
+          <input type="time" id="alarmTime" />
+        </label>
+        <div class="controls">
+          <button id="setAlarm" class="primary">Set</button>
+          <button id="clearAlarm">Clear</button>
+          <button id="snooze" class="warn">Snooze 5m</button>
+          <button id="testAlarm">Test</button>
+        </div>
+      </div>
+      <div class="readout" id="clockNow">--:--:--</div>
+    </section>
+
+    <!-- Timer (Portrait Secondary) -->
+    <section class="card stack feature" id="timerCard">
+      <div class="row" style="justify-content:space-between">
+        <div style="font-weight:800; font-size:18px;">⏳ Timer</div>
+        <div class="hint" id="timerStatus">Idle</div>
+      </div>
+      <div class="grid">
+        <div class="row">
+          <label class="stack" style="flex:1">
+            <span class="hint">Minutes</span>
+            <input type="number" id="timerMin" min="0" max="999" value="0" inputmode="numeric" />
+          </label>
+          <label class="stack" style="flex:1">
+            <span class="hint">Seconds</span>
+            <input type="number" id="timerSec" min="0" max="59" value="30" inputmode="numeric" />
+          </label>
+        </div>
+        <div class="controls">
+          <button id="startTimer" class="primary">Start</button>
+          <button id="pauseTimer">Pause</button>
+          <button id="resetTimer">Reset</button>
+          <button id="testTimer">Test</button>
+        </div>
+      </div>
+      <div class="readout" id="timerReadout">00:30.000</div>
+    </section>
+
+    <!-- Stopwatch (Landscape Primary) -->
+    <section class="card stack feature" id="stopwatchCard">
+      <div class="row" style="justify-content:space-between">
+        <div style="font-weight:800; font-size:18px;">⏱️ Stopwatch</div>
+        <div class="hint" id="swStatus">Ready</div>
+      </div>
+      <div class="controls">
+        <button id="swStart" class="primary">Start</button>
+        <button id="swStop">Stop</button>
+        <button id="swReset">Reset</button>
+        <button id="swLap">Lap</button>
+      </div>
+      <div class="readout" id="swReadout">00:00.000</div>
+      <div id="laps" class="stack"></div>
+    </section>
+
+    <!-- Weather (Landscape Secondary) -->
+    <section class="card stack feature" id="weatherCard">
+      <div class="row" style="justify-content:space-between">
+        <div style="font-weight:800; font-size:18px;">🌤️ Weather of the Day</div>
+        <button class="ghost" id="refreshWeather">Refresh</button>
+      </div>
+      <div class="weather">
+        <div class="stack" style="flex:1">
+          <div class="row" style="gap:8px; align-items:baseline;">
+            <div class="emoji" id="wEmoji">🌍</div>
+            <div style="font-weight:800;" id="wPlace">Locating…</div>
+          </div>
+          <div class="hint" id="wDesc">—</div>
+        </div>
+        <div class="stack" style="text-align:right">
+          <div id="wTemp" style="font-weight:900; font-size:28px;">--°</div>
+          <div class="hint" id="wRange">H --° / L --°</div>
+        </div>
+      </div>
+      <div class="hint" id="wNote">Using your device location and Open-Meteo (free).</div>
+    </section>
+
+    <footer>
+      Built for a hackathon challenge • Mobile-first • Works offline for timers/alarms • Weather via Open-Meteo • v1.0
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
